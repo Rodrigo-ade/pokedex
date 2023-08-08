@@ -1,10 +1,8 @@
-//siguientePeticion = respuesta.next;
-
 const IMAGEN_POKEBOLA = "src/assets/img/pokeball.png";
 const URL_BASE = "https://pokeapi.co/api/v2/";
+let peticion = `pokemon?limit=15&offset=`;
 let offset = 0;
 let cantidadTotal;
-let peticion = `pokemon?limit=15&offset=`;
 
 agregarEventosPokemones();
 obtenerPokemones(offset);
