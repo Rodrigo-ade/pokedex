@@ -51,8 +51,8 @@ function seleccionarPokemon(e){
         .then(respuesta => respuesta.json())
         .then(respuesta => {
             let nombre = respuesta.name;
-            let altura = respuesta.height;
-            let peso = respuesta.weight;
+            let altura = obtenerAlturaEnCentimetros(Number(respuesta.height));
+            let peso = obtenerPesoEnKilos(Number(respuesta.weight));
             let habilidades = respuesta.abilities.map(habilidad => habilidad.ability.name);
             let vida      = respuesta.stats[0].base_stat;
             let ataque    = respuesta.stats[1].base_stat;
@@ -62,6 +62,18 @@ function seleccionarPokemon(e){
             completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen);
         });
     }
+}
+
+function obtenerPesoEnKilos(peso){
+    peso = peso.toString();
+    peso = Number(peso.slice(0, -1) +"."+peso.slice(-1));
+    return peso;
+}
+
+function obtenerAlturaEnCentimetros(altura){
+    altura = altura.toString();
+    altura = Number(altura.slice(0,-1)+"."+altura.slice(-1));
+    return altura;
 }
 
 function completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen){
