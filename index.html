@@ -14,37 +14,29 @@
     </header>
 
     <div class="m-1 row row-cols-1 row-cols-md-5 g-4" id="pokemones">
-
-        <div class="col">
-            <div class="card border-success" data-bs-toggle="modal" data-bs-target="#pokemon-elegido">
-                <img class="align-self-center" src="src/assets/img/pokeball.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Nombre</h5>
-                </div>
-            </div>
-        </div>
-
+        
     </div>
 
     <div class="modal fade" id="pokemon-elegido" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="nombre-pokemon">Nombre Pokemon</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
 
-            <div class="modal-body">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png">
-                <p>Altura: <strong id="altura">10</strong> cm</p><p>Peso: <strong id="peso">100</strong> Kg</p>
-                <p>Habilidades: <strong id="habilidades">HABILIDAD1, HABILIDAD2</strong></p>
-                <p>Puntos de Vida: <strong id="vida">10</strong></p>
-                <p>Puntos de Velocidad: <strong id="velocidad">10</strong></p>
-                <p>Puntos de ataque: <strong id="ataque">10</strong></p> 
-                <p>Puntos de defensa: <strong id="defensa">10</strong></p> 
-            </div>
-        </div>
-        </div>
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content modal-pokemon">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="nombre-pokemon">Nombre Pokemon</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="imagen" src="">
+                        <p>Altura: <strong id="altura"></strong> cm</p><p>Peso: <strong id="peso"></strong> Kg</p>
+                        <p>Habilidades: <strong id="habilidades"></strong></p>
+                        <p>Puntos de Vida: <strong id="vida"></strong></p>
+                        <p>Puntos de Velocidad: <strong id="velocidad"></strong></p>
+                        <p>Puntos de ataque: <strong id="ataque"></strong></p> 
+                        <p>Puntos de defensa: <strong id="defensa"></strong></p> 
+                    </div>
+                </div>
+            
+            </div>  
     </div>
 
     <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
