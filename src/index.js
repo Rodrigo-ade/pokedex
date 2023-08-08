@@ -32,6 +32,49 @@ function agregarPokemones(pokemones){
 function agregarEventosPokemones(){
     document.querySelector("#pokemones").onclick = seleccionarPokemon;
 }
+
+function seleccionarPokemon(e){
+    let elemento = e.target;
+    let elementoPadre = e.target.offsetParent;
+    let url = "";
+
+    if(elemento.classList.contains("card")){
+        url = elemento.getAttribute("url");
+    }else if(elementoPadre.classList.contains("card")){
+        url = elementoPadre.getAttribute("url");
+    }
+
+    if(url !== ""){
+        completarDatosPokemon("cargando...","","","","","","","","");
+        fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(respuesta => {
+            let nombre = respuesta.name;
+            let altura = respuesta.height;
+            let peso = respuesta.weight;
+            let habilidades = respuesta.abilities.map(habilidad => habilidad.ability.name);
+            let vida      = respuesta.stats[0].base_stat;
+            let ataque    = respuesta.stats[1].base_stat;
+            let defensa   = respuesta.stats[2].base_stat;
+            let velocidad = respuesta.stats[5].base_stat;
+            let imagen    = respuesta.sprites.other['official-artwork'].front_default;             
+            completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen);
+        });
+    }
+}
+
+function completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen){
+    document.querySelector("#nombre-pokemon").textContent = nombre;
+    document.querySelector("#altura").textContent = altura;
+    document.querySelector("#peso").textContent = peso;
+    document.querySelector("#habilidades").textContent = habilidades;
+    document.querySelector("#vida").textContent = vida;
+    document.querySelector("#ataque").textContent = ataque;
+    document.querySelector("#defensa").textContent = defensa;
+    document.querySelector("#velocidad").textContent = velocidad;
+    document.querySelector("#imagen").src = imagen;
+};
+
 function crearPokemon(nombre,url){
     const CONTENEDOR_POKEMON = document.createElement("div");
     CONTENEDOR_POKEMON.className = "col";
