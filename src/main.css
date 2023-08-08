@@ -29,3 +29,19 @@ header{
 .page-item{
     cursor: pointer;
 }
+
+#vida{
+    color: green;
+}
+
+#velocidad{
+    color: aqua;
+}
+
+#ataque{
+    color: red;
+}
+
+#defensa{
+    color: orangered;
+}
