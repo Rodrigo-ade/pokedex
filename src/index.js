@@ -1,20 +1,21 @@
-let pokemones;
-const IMAGEN_POKEBOLA = "src/assets/img/pokeball.png";
+//siguientePeticion = respuesta.next;
 
+const IMAGEN_POKEBOLA = "src/assets/img/pokeball.png";
+const URL_BASE = "https://pokeapi.co/api/v2/";
+let offset = 0;
+let cantidadTotal;
+let peticion = `pokemon?limit=15&offset=`;
 
 agregarEventosPokemones();
-obtenerPokemones();
+obtenerPokemones(offset);
 
-function obtenerPokemones(){
-    const URL_BASE = "https://pokeapi.co/api/v2/";
-    let peticionAnterior =  "";
-    let siguientePeticion = `pokemon?limit=15&offset=0`;
+function obtenerPokemones(offset){
+    let pokemones;
 
-    fetch(`${URL_BASE}${siguientePeticion}`)
+    fetch(`${URL_BASE}${peticion}${offset}`)
     .then(respuesta => respuesta.json())
     .then(respuesta => {
-        peticionAnterior = siguientePeticion;
-        siguientePeticion = respuesta.next;
+        cantidadTotal = respuesta.count;
         pokemones = respuesta.results;
         agregarPokemones(pokemones);
     });
@@ -103,4 +104,41 @@ function crearPokemon(nombre,url){
     CONTENEDOR_POKEMON.appendChild(CARTA_POKEMON);
 
     document.querySelector("#pokemones").appendChild(CONTENEDOR_POKEMON);
+}
+
+const $BOTON_PREVIO = document.querySelector("#previo");
+const $BOTON_SIGUIENTE = document.querySelector("#siguiente");
+
+$BOTON_PREVIO.onclick = anteriorPagina;
+$BOTON_SIGUIENTE.onclick = siguientePagina;
+
+function anteriorPagina(){
+    offset -= 15;
+    if(offset <= 0){
+        offset = 0;
+        $BOTON_PREVIO.classList.add("oculto");
+    };
+    document.querySelector("#siguiente").classList.remove("oculto");
+    eliminarCartasAnteriores();
+    obtenerPokemones(offset);
+    
+}
+
+function siguientePagina(){
+    if(cantidadTotal < offset +15){
+        document.querySelector("#siguiente").classList.add("oculto");
+        return;
+    }
+
+    offset += 15;
+    $BOTON_PREVIO.classList.remove("oculto");
+    eliminarCartasAnteriores();
+    obtenerPokemones(offset);
+}
+
+function eliminarCartasAnteriores(){
+    let cartas = document.querySelector("#pokemones");
+    while(cartas.firstChild){
+        cartas.removeChild(cartas.firstChild);
+    }
 }

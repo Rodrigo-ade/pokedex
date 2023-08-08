@@ -13,12 +13,18 @@
         <h1>Pokedex</h1>
     </header>
 
+    <div class="row m-3 d-flex">
+        <ul class="pagination list-inline mx-auto justify-content-center">
+            <li id="previo" class="page-item oculto"><a class="page-link">Previous</a></li>
+            <li id="siguiente" class="page-item"><a class="page-link">Next</a></li>
+        </ul>            
+    </div>
+
     <div class="m-1 row row-cols-1 row-cols-md-5 g-4" id="pokemones">
         
     </div>
 
     <div class="modal fade" id="pokemon-elegido" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content modal-pokemon">
                     <div class="modal-header">
@@ -35,7 +41,6 @@
                         <p>Puntos de defensa: <strong id="defensa"></strong></p> 
                     </div>
                 </div>
-            
             </div>  
     </div>
 
