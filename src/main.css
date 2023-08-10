@@ -23,7 +23,11 @@ header{
 }
 
 .oculto{
-    visibility: hidden;
+    display: none;
+}
+
+.pagination{
+  overflow-x: auto
 }
 
 .page-item{

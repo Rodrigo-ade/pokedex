@@ -2,7 +2,7 @@ const IMAGEN_POKEBOLA = 'src/assets/img/pokeball.png';
 
 function crearPokemon(nombre, url, funcionElegirPokemon) {
   const CONTENEDOR_POKEMON = document.createElement('div');
-  CONTENEDOR_POKEMON.className = 'col';
+  CONTENEDOR_POKEMON.className = 'col pokemon';
   CONTENEDOR_POKEMON.addEventListener('click', () => funcionElegirPokemon(url));
 
   const CARTA_POKEMON = document.createElement('div');
@@ -49,6 +49,7 @@ export function mostrarDatosPokemon(pokemon) {
   document.querySelector('#defensa').textContent = pokemon.defensa;
   document.querySelector('#velocidad').textContent = pokemon.velocidad;
   document.querySelector('#imagen').src = pokemon.imagen;
+  document.querySelector('#imagen').alt = pokemon.nombre;
 }
 
 export function mostrarCargandoPokemon() {
