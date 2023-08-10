@@ -20,9 +20,9 @@ function paginarPokemones() {
 }
 
 function marcarPaginaSeleccionada() {
-  const paginaSelecionadaAnterior = document.querySelector('.active');
-  if (paginaSelecionadaAnterior) {
-    paginaSelecionadaAnterior.classList.remove('active');
+  const PAGINA_SELECCIONADA = document.querySelector('.active');
+  if (PAGINA_SELECCIONADA) {
+    PAGINA_SELECCIONADA.classList.remove('active');
   }
   document.querySelector(`[data-numero="${paginaActual}"]`).classList.add('active');
 }
@@ -52,9 +52,9 @@ function crearPaginaBoton(numeroPagina, callbackCambiarPagina) {
 }
 
 export function manejarPaginacion() {
-  const pokemonesTotales = paginarPokemones();
-  const cantidadPaginas = pokemonesTotales / POKEMONES_POR_PAGINA;
-  for (let i = 0; i < cantidadPaginas; i++) {
+  const POKEMONES_TOTALES = paginarPokemones();
+  const PAGINAS_TOTALES = POKEMONES_TOTALES / POKEMONES_POR_PAGINA;
+  for (let i = 0; i < PAGINAS_TOTALES; i++) {
     crearPaginaBoton(i + 1, cambiarPagina);
   }
   marcarPaginaSeleccionada();
