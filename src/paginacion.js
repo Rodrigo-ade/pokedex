@@ -28,6 +28,9 @@ function marcarPaginaSeleccionada() {
 }
 
 function cambiarPagina(numeroPagina) {
+  if (paginaActual === numeroPagina) {
+    return;
+  }
   paginaActual = numeroPagina;
   paginarPokemones();
   marcarPaginaSeleccionada();
