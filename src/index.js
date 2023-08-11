@@ -1,19 +1,16 @@
-const URL_BASE = "https://pokeapi.co/api/v2/";
-let peticion = `pokemon?limit=15&offset=`;
-let offset = 0;
-let cantidadTotal;
+let cantidadTotalPokemones;
 
 agregarEventosPokemones();
-obtenerPokemones(offset);
+obtenerPokemones();
 
-function obtenerPokemones(offset){
-    let pokemones;
+function obtenerPokemones(offset = 0){
+  const URL_BASE = "https://pokeapi.co/api/v2/pokemon?limit=15&offset=";
 
-    fetch(`${URL_BASE}${peticion}${offset}`)
+    fetch(`${URL_BASE}${offset}`)
     .then(respuesta => respuesta.json())
     .then(respuesta => {
-        cantidadTotal = respuesta.count;
-        pokemones = respuesta.results;
+        cantidadTotalPokemones = respuesta.count;
+        let pokemones = respuesta.results;
         agregarPokemones(pokemones);
     });
 }
@@ -120,23 +117,7 @@ function crearPokemon(nombre,url){
     document.querySelector("#pokemones").appendChild($contenedorPokemon);
 }
 
-const $botonPrevio = document.querySelector("#previo");
-const $botonSiguiente = document.querySelector("#siguiente");
 
-$botonPrevio.onclick = cargarAnteriorPagina;
-$botonSiguiente.onclick = siguientePagina;
-
-function cargarAnteriorPagina(){
-    offset -= 15;
-    if(offset <= 0){
-        offset = 0;
-        ocultarElemento($botonPrevio);
-    };
-    ocultarElemento($botonSiguiente, false);
-    eliminarCartasAnteriores();
-    obtenerPokemones(offset);
-    
-}
 
 function ocultarElemento(elemento, ocultar = true){
   if(ocultar){
@@ -146,21 +127,43 @@ function ocultarElemento(elemento, ocultar = true){
   }
 }
 
-function siguientePagina(){
-    if(cantidadTotal < offset +15){
-        ocultarElemento($botonSiguiente);
-        return;
-    }
-
-    offset += 15;
-    ocultarElemento($botonPrevio,false);
-    eliminarCartasAnteriores();
-    obtenerPokemones(offset);
-}
-
 function eliminarCartasAnteriores(){
     let cartas = document.querySelector("#pokemones");
     while(cartas.firstChild){
         cartas.removeChild(cartas.firstChild);
     }
+}
+
+const $botonPrevio = document.querySelector("#previo");
+const $botonSiguiente = document.querySelector("#siguiente");
+
+$botonPrevio.onclick = cargarAnteriorPagina;
+$botonSiguiente.onclick = cargarSiguientePagina;
+
+let offset = 0;
+const TAMANIO_PAGINA = 15;
+
+function cargarSiguientePagina(){
+  console.log(112);
+  if(cantidadTotalPokemones < offset + TAMANIO_PAGINA){
+      ocultarElemento($botonSiguiente);
+      return;
+  }
+
+  offset += TAMANIO_PAGINA;
+  ocultarElemento($botonPrevio,false);
+  eliminarCartasAnteriores();
+  obtenerPokemones(offset);
+}
+
+function cargarAnteriorPagina(){
+    offset -= TAMANIO_PAGINA;
+    if(offset <= 0){
+        offset = 0;
+        ocultarElemento($botonPrevio);
+    };
+    ocultarElemento($botonSiguiente, false);
+    eliminarCartasAnteriores();
+    obtenerPokemones(offset);
+    
 }
