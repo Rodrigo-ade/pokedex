@@ -67,7 +67,7 @@ function obtenerPesoEnKilos(peso){
     peso = Number(peso.slice(0, -1) +"."+peso.slice(-1));
     return peso;
 }
-
+    
 function obtenerAlturaEnCentimetros(altura){
     altura = altura.toString();
     altura = Number(altura.slice(0,-1)+"."+altura.slice(-1));
@@ -122,7 +122,7 @@ const $BOTON_SIGUIENTE = document.querySelector("#siguiente");
 $BOTON_PREVIO.onclick = anteriorPagina;
 $BOTON_SIGUIENTE.onclick = siguientePagina;
 
-function anteriorPagina(){
+function cargarAnteriorPagina(){
     offset -= 15;
     if(offset <= 0){
         offset = 0;
