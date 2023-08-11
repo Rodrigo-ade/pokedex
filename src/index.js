@@ -1,4 +1,3 @@
-const IMAGEN_POKEBOLA = "src/assets/img/pokeball.png";
 const URL_BASE = "https://pokeapi.co/api/v2/";
 let peticion = `pokemon?limit=15&offset=`;
 let offset = 0;
@@ -33,45 +32,49 @@ function agregarEventosPokemones(){
 }
 
 function seleccionarPokemon(e){
-    let elemento = e.target;
-    let elementoPadre = e.target.offsetParent;
+    let $pokemon = e.target;
+    let $contenedorPokemon = e.target.offsetParent;
     let url = "";
 
-    if(elemento.classList.contains("card")){
-        url = elemento.getAttribute("url");
-    }else if(elementoPadre.classList.contains("card")){
-        url = elementoPadre.getAttribute("url");
+    if($pokemon.classList.contains("card")){
+        url = $pokemon.getAttribute("url");
+    }else if($contenedorPokemon.classList.contains("card")){
+        url = $contenedorPokemon.getAttribute("url");
     }
 
     if(url !== ""){
-        completarDatosPokemon("cargando...","","","","","","","","");
+        mostrarMensaje("Cargando...");
         fetch(url)
         .then(respuesta => respuesta.json())
         .then(respuesta => {
-            let nombre = respuesta.name;
-            let altura = obtenerAlturaEnCentimetros(Number(respuesta.height));
-            let peso = obtenerPesoEnKilos(Number(respuesta.weight));
-            let habilidades = respuesta.abilities.map(habilidad => habilidad.ability.name);
-            let vida      = respuesta.stats[0].base_stat;
-            let ataque    = respuesta.stats[1].base_stat;
-            let defensa   = respuesta.stats[2].base_stat;
-            let velocidad = respuesta.stats[5].base_stat;
-            let imagen    = respuesta.sprites.other['official-artwork'].front_default;             
+            const nombre = respuesta.name;
+            const altura = obtenerAlturaEnCentimetros(Number(respuesta.height));
+            const peso = obtenerPesoEnKilos(Number(respuesta.weight));
+            const habilidades = respuesta.abilities.map(habilidad => habilidad.ability.name);
+            const vida      = respuesta.stats[0].base_stat;
+            const ataque    = respuesta.stats[1].base_stat;
+            const defensa   = respuesta.stats[2].base_stat;
+            const velocidad = respuesta.stats[5].base_stat;
+            const imagen    = respuesta.sprites.other['official-artwork'].front_default;             
             completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen);
         });
     }
 }
 
+function mostrarMensaje(mensaje){
+  completarDatosPokemon(mensaje);
+}
+
 function obtenerPesoEnKilos(peso){
-    peso = peso.toString();
-    peso = Number(peso.slice(0, -1) +"."+peso.slice(-1));
-    return peso;
+    let pesoNumero = peso.toString();
+    let pesoKilos = Number(pesoNumero.slice(0, -1) +"."+pesoNumero.slice(-1));
+    return pesoKilos;
 }
     
 function obtenerAlturaEnCentimetros(altura){
-    altura = altura.toString();
-    altura = Number(altura.slice(0,-1)+"."+altura.slice(-1));
-    return altura;
+    let alturaNumero = altura.toString();
+    let alturaCentimetros = Number(alturaNumero.slice(0,-1)+"."+alturaNumero.slice(-1));
+    return alturaCentimetros;
 }
 
 function completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defensa,velocidad,imagen){
@@ -87,61 +90,70 @@ function completarDatosPokemon(nombre,altura,peso,habilidades,vida,ataque,defens
 };
 
 function crearPokemon(nombre,url){
-    const CONTENEDOR_POKEMON = document.createElement("div");
-    CONTENEDOR_POKEMON.className = "col";
+    const IMAGEN_POKEBOLA = "src/assets/img/pokeball.png";
+    const $contenedorPokemon = document.createElement("div");
+    $contenedorPokemon.className = "col";
 
-    const CARTA_POKEMON = document.createElement("div");
-    CARTA_POKEMON.className = "card border-success";
-    CARTA_POKEMON.setAttribute("data-bs-toggle","modal");
-    CARTA_POKEMON.setAttribute("data-bs-target", "#pokemon-elegido");
-    CARTA_POKEMON.setAttribute("url", url);
+    const $cartaPokemon = document.createElement("div");
+    $cartaPokemon.className = "card border-success";
+    $cartaPokemon.setAttribute("data-bs-toggle","modal");
+    $cartaPokemon.setAttribute("data-bs-target", "#pokemon-elegido");
+    $cartaPokemon.setAttribute("url", url);
 
-    const IMAGEN = document.createElement("img");
-    IMAGEN.className = "align-self-center"
-    IMAGEN.src = IMAGEN_POKEBOLA;
-    IMAGEN.alt = "pokebola";
+    const $imagen = document.createElement("img");
+    $imagen.className = "align-self-center"
+    $imagen.src = IMAGEN_POKEBOLA;
+    $imagen.alt = "pokebola";
 
-    const CARTA_CUERPO = document.createElement("div");
-    CARTA_CUERPO.className = "card-body";
+    const $cartaCuerpo = document.createElement("div");
+    $cartaCuerpo.className = "card-body";
 
-    const CARTA_TITULO = document.createElement("h5");
-    CARTA_TITULO.className = "card-title text-center";
-    CARTA_TITULO.textContent = nombre;
+    const $cartaTitulo = document.createElement("h5");
+    $cartaTitulo.className = "card-title text-center";
+    $cartaTitulo.textContent = nombre;
 
-    CARTA_CUERPO.appendChild(CARTA_TITULO);
-    CARTA_POKEMON.appendChild(IMAGEN);
-    CARTA_POKEMON.appendChild(CARTA_CUERPO);
-    CONTENEDOR_POKEMON.appendChild(CARTA_POKEMON);
+    $cartaCuerpo.appendChild($cartaTitulo);
+    $cartaPokemon.appendChild($imagen);
+    $cartaPokemon.appendChild($cartaCuerpo);
+    $contenedorPokemon.appendChild($cartaPokemon);
 
-    document.querySelector("#pokemones").appendChild(CONTENEDOR_POKEMON);
+    document.querySelector("#pokemones").appendChild($contenedorPokemon);
 }
 
-const $BOTON_PREVIO = document.querySelector("#previo");
-const $BOTON_SIGUIENTE = document.querySelector("#siguiente");
+const $botonPrevio = document.querySelector("#previo");
+const $botonSiguiente = document.querySelector("#siguiente");
 
-$BOTON_PREVIO.onclick = anteriorPagina;
-$BOTON_SIGUIENTE.onclick = siguientePagina;
+$botonPrevio.onclick = cargarAnteriorPagina;
+$botonSiguiente.onclick = siguientePagina;
 
 function cargarAnteriorPagina(){
     offset -= 15;
     if(offset <= 0){
         offset = 0;
-        $BOTON_PREVIO.classList.add("oculto");
+        ocultarElemento($botonPrevio);
     };
-    document.querySelector("#siguiente").classList.remove("oculto");
+    ocultarElemento($botonSiguiente, false);
     eliminarCartasAnteriores();
     obtenerPokemones(offset);
     
 }
 
+function ocultarElemento(elemento, ocultar = true){
+  if(ocultar){
+    elemento.classList.add("oculto");
+  }else{
+    elemento.classList.remove("oculto");
+  }
+}
+
 function siguientePagina(){
     if(cantidadTotal < offset +15){
-        document.querySelector("#siguiente").classList.add("oculto");
+        ocultarElemento($botonSiguiente);
         return;
     }
 
     offset += 15;
-    $BOTON_PREVIO.classList.remove("oculto");
+    ocultarElemento($botonPrevio,false);
     eliminarCartasAnteriores();
     obtenerPokemones(offset);
 }
