@@ -144,7 +144,6 @@ let offset = 0;
 const TAMANIO_PAGINA = 15;
 
 function cargarSiguientePagina(){
-  console.log(112);
   if(cantidadTotalPokemones < offset + TAMANIO_PAGINA){
       ocultarElemento($botonSiguiente);
       return;
