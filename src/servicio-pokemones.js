@@ -1,11 +1,31 @@
-export async function obtenerPokemones() {
-  const URL_POKEMONES = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+import {
+  obtenerPokemon as obtenerPokemonDeStorage,
+  obtenerPokemones as obtenerPokemonesDeStorage,
+  guardarPokemon,
+  guardarPokemones,
+} from './storage.js';
 
-  return fetch(`${URL_POKEMONES}`)
-    .then((respuesta) => respuesta.json())
-    .then((respuesta) => respuesta.results);
+import {
+  obtenerPokemon as obtenerPokemonDeApi,
+  obtenerPokemones as obtenerPokemonesDeApi,
+} from './api.js';
+
+export async function obtenerPokemones() {
+  try {
+    return obtenerPokemonesDeStorage();
+  } catch (e) {
+    const pokemones = await obtenerPokemonesDeApi();
+    guardarPokemones(pokemones);
+    return pokemones;
+  }
 }
 
 export async function obtenerPokemon(url) {
-  return fetch(url).then((respuesta) => respuesta.json());
+  try {
+    return obtenerPokemonDeStorage(url);
+  } catch (e) {
+    const pokemon = await obtenerPokemonDeApi(url);
+    guardarPokemon(pokemon);
+    return pokemon;
+  }
 }
