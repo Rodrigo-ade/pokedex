@@ -3,12 +3,12 @@ import {
   obtenerPokemones as obtenerPokemonesDeStorage,
   guardarPokemon,
   guardarPokemones,
-} from './storage.js';
+} from '../storage/storage.js';
 
 import {
   obtenerPokemon as obtenerPokemonDeApi,
   obtenerPokemones as obtenerPokemonesDeApi,
-} from './api.js';
+} from '../api/api.js';
 
 export async function obtenerPokemones() {
   try {

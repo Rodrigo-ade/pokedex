@@ -1,7 +1,7 @@
 import { mostrarPokemones, mostrarDatosPokemon, mostrarCargandoPokemon } from './ui/ui.js';
-import { obtenerPokemones, obtenerPokemon } from './servicio-pokemones.js';
+import { obtenerPokemones, obtenerPokemon } from './servicios/servicio-pokemones.js';
 import { obtenerDatosPokemon } from './ui/conversion-datos.js';
-import { manejarPaginacion } from './paginacion.js';
+import { manejarPaginacion } from './ui/paginacion.js';
 
 async function elegirPokemon(url) {
   mostrarCargandoPokemon();
