@@ -1,0 +1,51 @@
+body{
+  background-color: #0d202b;
+}
+
+header{
+  color: white;
+  border-bottom: 1px solid rgb(80, 80, 80);
+}
+
+.card img{
+  width:  8rem;
+}
+
+.card:hover{
+  background-color: red;
+  transition:  2s all;
+  cursor: pointer;
+}
+
+#pokemon-elegido img{
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.oculto{
+  display: none;
+}
+
+.pagination{
+  overflow-x: auto
+}
+
+.page-item{
+  cursor: pointer;
+}
+
+#vida{
+  color: green;
+}
+
+#velocidad{
+  color: aqua;
+}
+
+#ataque{
+  color: red;
+}
+
+#defensa{
+  color: orangered;
+}
