@@ -9,43 +9,8 @@
     <link rel='stylesheet' type='text/css' media='screen' href='src/main.css'>
 </head>
 <body>
-    <header class="text-center mb-2">
-        <h1>Pokedex</h1>
-    </header>
 
-    <div class="row m-3 d-flex">
-        <ul class="pagination list-inline mx-auto justify-content-center">
-            <li id="previo" class="page-item oculto"><a class="page-link">Previous</a></li>
-            <li id="siguiente" class="page-item"><a class="page-link">Next</a></li>
-        </ul>            
-    </div>
 
-    <div class="m-1 row row-cols-1 row-cols-md-5 g-4" id="pokemones">
-        
-    </div>
-
-    <div class="modal fade" id="pokemon-elegido" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content modal-pokemon">
-                    <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="nombre-pokemon">Nombre Pokemon</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="imagen" src="">
-                        <p>Altura: <strong id="altura"></strong> m</p><p>Peso: <strong id="peso"></strong> Kg</p>
-                        <p>Habilidades: <strong id="habilidades"></strong></p>
-                        <p>Puntos de Vida: <strong id="vida"></strong></p>
-                        <p>Puntos de Velocidad: <strong id="velocidad"></strong></p>
-                        <p>Puntos de ataque: <strong id="ataque"></strong></p> 
-                        <p>Puntos de defensa: <strong id="defensa"></strong></p> 
-                    </div>
-                </div>
-            </div>  
-    </div>
-
-    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src='src/index.js'></script>
 </body>
 </html>
