@@ -31,11 +31,9 @@ function crearPokemon(nombre, url, funcionElegirPokemon) {
   document.querySelector('#pokemones').appendChild(CONTENEDOR_POKEMON);
 }
 
-export function mostrarPokemones(pokemones, funcionElegirPokemon) {
-  Object.keys(pokemones).forEach((pokemon) => {
-    const nombrePokemon = pokemones[pokemon].name;
-    const { url } = pokemones[pokemon];
-    crearPokemon(nombrePokemon, url, funcionElegirPokemon);
+export function mostrarPokemones(pokemonesDatos, funcionElegirPokemon) {
+  pokemonesDatos.forEach((pokemonDatos) => {
+    crearPokemon(pokemonDatos.nombre, pokemonDatos.url, funcionElegirPokemon);
   });
 }
 
