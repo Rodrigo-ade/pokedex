@@ -5,7 +5,7 @@ import {
   guardarPokemones,
 } from '../storage/storage.js';
 
-import { mapearPokemones } from '../mapeadores/mapeadores.js';
+import { mapearPokemones, mapearPokemon } from '../mapeadores/mapeadores.js';
 
 import {
   obtenerPokemon as obtenerPokemonDeApi,
@@ -22,11 +22,11 @@ export async function obtenerPokemones() {
   }
 }
 
-export async function obtenerPokemon(url) {
+export async function obtenerPokemon(nombre) {
   try {
-    return obtenerPokemonDeStorage(url);
+    return obtenerPokemonDeStorage(nombre);
   } catch (e) {
-    const pokemon = await obtenerPokemonDeApi(url);
+    const pokemon = mapearPokemon(await obtenerPokemonDeApi(nombre));
     guardarPokemon(pokemon);
     return pokemon;
   }
