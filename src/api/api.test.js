@@ -17,7 +17,7 @@ test('Prueba obtener 1 Pokemon', () => {
   obtenerPokemon('prueba');
 
   expect(global.fetch)
-    .toBeCalledWith('prueba');
+    .toBeCalledWith('https://pokeapi.co/api/v2/pokemon/prueba');
 });
 
 test('Prueba obtener pokemones', () => {

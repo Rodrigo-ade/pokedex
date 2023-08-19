@@ -3,7 +3,7 @@ const IMAGEN_POKEBOLA = 'src/assets/img/pokeball.png';
 function crearPokemon(nombre, url, funcionElegirPokemon) {
   const CONTENEDOR_POKEMON = document.createElement('div');
   CONTENEDOR_POKEMON.className = 'col pokemon';
-  CONTENEDOR_POKEMON.addEventListener('click', () => funcionElegirPokemon(url));
+  CONTENEDOR_POKEMON.addEventListener('click', () => funcionElegirPokemon(nombre));
 
   const CARTA_POKEMON = document.createElement('div');
   CARTA_POKEMON.className = 'card border-success';
@@ -31,11 +31,9 @@ function crearPokemon(nombre, url, funcionElegirPokemon) {
   document.querySelector('#pokemones').appendChild(CONTENEDOR_POKEMON);
 }
 
-export function mostrarPokemones(pokemones, funcionElegirPokemon) {
-  Object.keys(pokemones).forEach((pokemon) => {
-    const nombrePokemon = pokemones[pokemon].name;
-    const { url } = pokemones[pokemon];
-    crearPokemon(nombrePokemon, url, funcionElegirPokemon);
+export function mostrarPokemones(pokemonesDatos, funcionElegirPokemon) {
+  pokemonesDatos.forEach((pokemonDatos) => {
+    crearPokemon(pokemonDatos.nombre, pokemonDatos.url, funcionElegirPokemon);
   });
 }
 
@@ -44,10 +42,10 @@ export function mostrarDatosPokemon(pokemon) {
   document.querySelector('#altura').textContent = pokemon.altura;
   document.querySelector('#peso').textContent = pokemon.peso;
   document.querySelector('#habilidades').textContent = pokemon.habilidades;
-  document.querySelector('#vida').textContent = pokemon.vida;
-  document.querySelector('#ataque').textContent = pokemon.ataque;
-  document.querySelector('#defensa').textContent = pokemon.defensa;
-  document.querySelector('#velocidad').textContent = pokemon.velocidad;
+  document.querySelector('#vida').textContent = pokemon.estadisticas[0].puntos;
+  document.querySelector('#ataque').textContent = pokemon.estadisticas[1].puntos;
+  document.querySelector('#defensa').textContent = pokemon.estadisticas[2].puntos;
+  document.querySelector('#velocidad').textContent = pokemon.estadisticas[5].puntos;
   document.querySelector('#imagen').src = pokemon.imagen;
   document.querySelector('#imagen').alt = pokemon.nombre;
 }

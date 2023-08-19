@@ -15,17 +15,21 @@ export function obtenerPokemones() {
 }
 
 function crearKeyPokemon(pokemon) {
-  return `pokemon_${pokemon.name}`;
+  return `pokemon_${pokemon.nombre}`;
+}
+
+function obtenerKeyPokemon(nombre) {
+  return `pokemon_${nombre}`;
 }
 
 export function guardarPokemon(pokemon) {
   localStorage.setItem(crearKeyPokemon(pokemon), JSON.stringify(pokemon));
 }
 
-export function obtenerPokemon(url) {
-  const pokemon = localStorage.getItem(JSON.parse(crearKeyPokemon(url)));
+export function obtenerPokemon(nombre) {
+  const pokemon = JSON.parse(localStorage.getItem(obtenerKeyPokemon(nombre)));
   if (pokemon === null) {
-    throw new Error(`El pokemon ${url} no esta en local storage`);
+    throw new Error(`El pokemon ${nombre} no esta en local storage`);
   }
   return pokemon;
 }

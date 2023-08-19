@@ -1,11 +1,13 @@
-export async function obtenerPokemon(url) {
-  return fetch(url).then((respuesta) => respuesta.json());
+const URL_BASE = 'https://pokeapi.co/api/v2';
+
+export async function obtenerPokemon(nombre) {
+  const PETICION_POKEMON = `/pokemon/${nombre}`;
+  return fetch(URL_BASE + PETICION_POKEMON).then((r) => r.json());
 }
 
 export async function obtenerPokemones() {
-  const URL_POKEMONES = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+  const URL_POKEMONES = '/pokemon?limit=100000&offset=0';
 
-  return fetch(`${URL_POKEMONES}`)
-    .then((respuesta) => respuesta.json())
-    .then((respuesta) => respuesta.results);
+  return fetch(URL_BASE + URL_POKEMONES)
+    .then((respuesta) => respuesta.json());
 }
